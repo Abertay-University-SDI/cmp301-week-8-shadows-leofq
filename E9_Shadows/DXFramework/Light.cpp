@@ -99,15 +99,20 @@ float Light::getSpecularPower()
 	return specularPower;
 }
 
-XMFLOAT3 Light::getPosition()
+XMFLOAT4 Light::getPosition()
 {
-	XMFLOAT3 temp(XMVectorGetX(position), XMVectorGetY(position), XMVectorGetZ(position));
+	XMFLOAT4 temp(XMVectorGetX(position), XMVectorGetY(position), XMVectorGetZ(position), 0);
 	return temp;
 }
 
 void Light::setLookAt(float x, float y, float z)
 {
 	lookAt = XMVectorSet(x, y, z, 1.0f);
+}
+
+void Light::setLightType(int n)
+{
+	lightType = n;
 }
 
 XMMATRIX Light::getViewMatrix()

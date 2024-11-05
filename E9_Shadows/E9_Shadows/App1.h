@@ -7,6 +7,7 @@
 #include "TextureShader.h"
 #include "ShadowShader.h"
 #include "DepthShader.h"
+#include "LightShader.h"
 
 class App1 : public BaseApplication
 {
@@ -32,8 +33,18 @@ private:
 	AModel* model;
 	ShadowShader* shadowShader;
 	DepthShader* depthShader;
-
+	SphereMesh* sphere;
+	OrthoMesh* orthoMesh;
 	ShadowMap* shadowMap;
+	ShadowMap* shadowMap1;
+	ID3D11ShaderResourceView* shadowMaps[2];
+	CubeMesh* cube;
+	float rotate;
+	float lightPosX;
+
+	Light* light1;
+	Light* light2;
+	Light* lights[2];
 };
 
 #endif
