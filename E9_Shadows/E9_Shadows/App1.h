@@ -37,6 +37,9 @@ private:
 	OrthoMesh* orthoMesh;
 	ShadowMap* shadowMap;
 	ShadowMap* shadowMap1;
+
+	OrthoMesh* shadowOrtho;
+
 	ID3D11ShaderResourceView* shadowMaps[2];
 	CubeMesh* cube;
 	float rotate;

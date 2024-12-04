@@ -36,6 +36,9 @@ void App1::init(HINSTANCE hinstance, HWND hwnd, int screenWidth, int screenHeigh
 	shadowMap1 = new ShadowMap(renderer->getDevice(), shadowmapWidth, shadowmapHeight);
 	orthoMesh = new OrthoMesh(renderer->getDevice(), renderer->getDeviceContext(), screenWidth/2, screenHeight/2);
 
+	shadowOrtho = new OrthoMesh(renderer->getDevice(), renderer->getDeviceContext(), screenWidth / 2, screenHeight / 2, -screenWidth / 2, screenHeight / 2);
+
+
 	lightpos = XMFLOAT3(10, 5, 2);
 	lightpos2 = XMFLOAT3(8.5, 5, 2);
 	lightpos3 = XMFLOAT3(0.f, 0.f, -10.f);
@@ -216,6 +219,18 @@ void App1::finalPass()
 	sphere->sendData(renderer->getDeviceContext());
 	textureShader->setShaderParameters(renderer->getDeviceContext(), worldMatrix * XMMatrixTranslation(lightpos2.x, lightpos2.y, lightpos2.z), viewMatrix, projectionMatrix, textureMgr->getTexture(L"brick"));
 	textureShader->render(renderer->getDeviceContext(), cube->getIndexCount());
+
+	worldMatrix = renderer->getWorldMatrix();
+	XMMATRIX orthoMatrix = renderer->getOrthoMatrix();
+	XMMATRIX orthoViewMatrix = camera->getOrthoViewMatrix();
+
+	// shadow map ortho
+	renderer->setZBuffer(false);
+
+	shadowOrtho->sendData(renderer->getDeviceContext());
+	textureShader->setShaderParameters(renderer->getDeviceContext(), worldMatrix, orthoViewMatrix, orthoMatrix, shadowMap1->getDepthMapSRV());
+	textureShader->render(renderer->getDeviceContext(), shadowOrtho->getIndexCount());
+	renderer->setZBuffer(true);
 
 	gui();
 	renderer->endScene();
