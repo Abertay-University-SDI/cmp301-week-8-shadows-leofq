@@ -4,8 +4,8 @@ cbuffer MatrixBuffer : register(b0)
 	matrix worldMatrix;
 	matrix viewMatrix;
 	matrix projectionMatrix;
-	matrix lightViewMatrix;
-	matrix lightProjectionMatrix;
+	matrix lightViewMatrix[2];
+	matrix lightProjectionMatrix[2];
 };
 
 struct InputType
@@ -21,6 +21,7 @@ struct OutputType
     float2 tex : TEXCOORD0;
 	float3 normal : NORMAL;
     float4 lightViewPos : TEXCOORD1;
+    float4 lightViewPos2 : TEXCOORD2;
 };
 
 
@@ -35,8 +36,14 @@ OutputType main(InputType input)
     
 	// Calculate the position of the vertice as viewed by the light source.
     output.lightViewPos = mul(input.position, worldMatrix);
-    output.lightViewPos = mul(output.lightViewPos, lightViewMatrix);
-    output.lightViewPos = mul(output.lightViewPos, lightProjectionMatrix);
+    output.lightViewPos = mul(output.lightViewPos, lightViewMatrix[0]);
+    output.lightViewPos = mul(output.lightViewPos, lightProjectionMatrix[0]);
+    
+    // Calculate the position of the vertice as viewed by the light source.
+    output.lightViewPos2 = mul(input.position, worldMatrix);
+    output.lightViewPos2 = mul(output.lightViewPos2, lightViewMatrix[1]);
+    output.lightViewPos2 = mul(output.lightViewPos2, lightProjectionMatrix[1]);
+    
 
     output.tex = input.tex;
     output.normal = mul(input.normal, (float3x3)worldMatrix);

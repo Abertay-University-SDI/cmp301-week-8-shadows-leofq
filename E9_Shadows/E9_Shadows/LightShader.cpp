@@ -112,11 +112,11 @@ void LightShader::setShaderParameters(ID3D11DeviceContext* deviceContext, const 
 
 	lightPtr->ambient[0] = lights[0]->getAmbientColour();
 	lightPtr->diffuse[0] = lights[0]->getDiffuseColour();
-	lightPtr->position[0] = XMFLOAT4(0.f, 0.f, -10.f, 0.1);
+	lightPtr->position[0] = XMFLOAT4(lights[0]->getPosition().x, lights[0]->getPosition().y, lights[0]->getPosition().z, 0.1);
 
 	lightPtr->ambient[1] = lights[1]->getAmbientColour();
 	lightPtr->diffuse[1] = lights[1]->getDiffuseColour();
-	lightPtr->position[1] = XMFLOAT4(0.f, 0.f, -10.f, 0.1);
+	lightPtr->position[1] = XMFLOAT4(lights[1]->getPosition().x, lights[1]->getPosition().y, lights[1]->getPosition().z, 0.1);
 
 	lightPtr->constantFactor = 0.5;
 	lightPtr->linearFactor = 0.125;

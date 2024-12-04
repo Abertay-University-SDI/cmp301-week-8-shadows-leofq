@@ -50,7 +50,7 @@ public:
 	XMFLOAT3 getDirection();			///< Get light direction, returns float3
 	XMFLOAT4 getSpecularColour();		///< Get specular colour, returns float4
 	float getSpecularPower();			///< Get specular power, returns float
-	XMFLOAT4 getPosition();				///< Get light position, returns float3
+	XMFLOAT3 getPosition();				///< Get light position, returns float3
 	XMMATRIX getViewMatrix();			///< Get light view matrix for shadow mapping, returns XMMATRIX
 	XMMATRIX getProjectionMatrix();		///< Get light projection matrix for shadow mapping, returns XMMATRIX
 	XMMATRIX getOrthoMatrix();			///< Get light orthographic matrix for shadow mapping, returns XMMATRIX

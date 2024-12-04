@@ -99,9 +99,9 @@ float Light::getSpecularPower()
 	return specularPower;
 }
 
-XMFLOAT4 Light::getPosition()
+XMFLOAT3 Light::getPosition()
 {
-	XMFLOAT4 temp(XMVectorGetX(position), XMVectorGetY(position), XMVectorGetZ(position), 0);
+	XMFLOAT3 temp(XMVectorGetX(position), XMVectorGetY(position), XMVectorGetZ(position));
 	return temp;
 }
 

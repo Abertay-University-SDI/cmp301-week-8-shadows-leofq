@@ -45,6 +45,11 @@ private:
 	Light* light1;
 	Light* light2;
 	Light* lights[2];
+
+	XMFLOAT3 lightpos ;
+	XMFLOAT3 lightpos2 ;
+	XMFLOAT3 lightpos3 ;
+	XMFLOAT3 lightrotation;
 };
 
 #endif

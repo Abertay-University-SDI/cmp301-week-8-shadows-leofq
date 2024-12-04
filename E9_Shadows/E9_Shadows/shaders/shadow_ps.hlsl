@@ -20,6 +20,7 @@ struct InputType
     float2 tex : TEXCOORD0;
 	float3 normal : NORMAL;
     float4 lightViewPos : TEXCOORD1;
+    float4 lightViewPos2 : TEXCOORD2;
 };
 
 // Calculate lighting intensity based on direction and normal. Combine with light colour.
@@ -85,9 +86,13 @@ float4 main(InputType input) : SV_TARGET
             // is NOT in shadow, therefore light
                 colour += calculateLighting(-direction[i], input.normal, diffuse[i]);
             }
+            else
+            {
+                colour += (0,0,0, 1);
+            }
         }
     
-        colour += saturate(colour + ambient[i]);
+        colour = saturate(colour + ambient[i]);
     }
     return saturate(colour) * textureColour;
 }
